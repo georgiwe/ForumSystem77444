@@ -47,6 +47,7 @@
         public ActionResult Update([DataSourceRequest]DataSourceRequest request, QuestionAdministrationViewModel model)
         {
             base.Update<Post, QuestionAdministrationViewModel>(model, model.Id);
+            var x = new Post();
             return this.GridOperation(model, request);
         }
 

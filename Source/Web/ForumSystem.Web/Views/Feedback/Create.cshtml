@@ -1,0 +1,23 @@
+﻿@model ForumSystem.Web.InputModels.Feedback.FeedbackInputModel
+
+@{
+    ViewBag.Title = "Give Feedback";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@using (@Html.BeginForm("Create", "Feedback", FormMethod.Post, new { @class = "form form-horizontal" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.EditorFor(m => m.Title)
+    @Html.EditorFor(m => m.Content)
+    
+    <input type="submit" value="Give Feedback" class="btn btn-default" />
+}
+
+<br />
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

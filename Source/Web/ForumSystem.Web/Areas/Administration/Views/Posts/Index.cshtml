@@ -1,0 +1,26 @@
+﻿@using ForumSystem.Web.Infrastructure.Helpers;
+@using ForumSystem.Web.ViewModels.Questions;
+
+@section styles{
+    <link href="~/Content/kendo/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/Content/kendo/kendo.flat.min.css" rel="stylesheet" />
+}
+
+@{
+    ViewBag.Title = "Posts Administration";
+}
+
+<h2>@ViewBag.Title</h2>
+
+@(Html.FullFeaturedGrid<QuestionAdministrationViewModel>("Posts", m => m.Id))
+
+@section Scripts{
+    <script src="~/Scripts/kendo/kendo.all.min.js"></script>
+    <script src="~/Scripts/kendo/kendo.aspnetmvc.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+
+    </script>
+}

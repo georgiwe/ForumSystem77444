@@ -1,0 +1,6 @@
+﻿@model int
+
+@{
+    var voteRating = Model > 0 ? ("+" + Model) : Model.ToString();
+}
+<span>@voteRating</span>

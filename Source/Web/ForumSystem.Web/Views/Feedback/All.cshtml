@@ -1,0 +1,59 @@
+﻿@using System.Collections.Generic;
+@using ForumSystem.Web.ViewModels.Feedbacks;
+@model IEnumerable<FeedbackViewModel>
+
+@{
+    ViewBag.Title = "All Feedback We've received";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+
+@{
+    var pager = Session[Const.Pager] as PagingHelper;
+}
+
+<ul class="pagination pagination-sm col-md-6">
+
+    <li>@Html.ActionLink("«", "All", new { page = pager.CurrentPage - 1 })</li>
+
+    @for (int i = 1; i <= pager.TotalPages; i++)
+    {
+        <li>@Html.ActionLink(i.ToString(), null, new { page = i })</li>
+    }
+
+    <li>@Html.ActionLink("»", "All", new { page = pager.CurrentPage + 1 })</li>
+
+
+    @*<li><a href="#">«</a></li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">»</a></li>*@
+</ul>
+
+<table class="table table-hover table-condensed table-striped">
+    <thead>
+        <tr>
+            <th>Author</th>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Created On</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var fb in Model)
+        {
+            <tr>
+                <td>@fb.Author</td>
+                <td>@fb.Title</td>
+                <td>@Html.Raw(fb.Content)</td>
+                <td>@fb.CreatedOn</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<br />

@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ForumSystem.Web.ViewModels.Home.IndexBlogPostViewModel>
+@{
+    ViewBag.Title = "Home Page";
+    var i = 0;
+}
+<div class="container">
+    @foreach (var post in Model)
+    {
+        i++;
+        var voteRating = post.VoteRating > 0 ? ("+" + post.VoteRating) : post.VoteRating.ToString();
+
+        <div class="row">
+            <div class="col-md-1">
+                <div class="well text-center">
+                    <div>
+                        <div id="voting-@i" class="row">@(voteRating == "" ? "0" : voteRating) </div>
+                        <div class="row">votes</div>
+                    </div>
+                    <div class="voting-panel">
+                        @Ajax.ActionLink("Up", "Upvote", "Questions", new { id = post.Id, url = post.Title }, new AjaxOptions
+                           {
+                               HttpMethod = "GET",
+                               AllowCache = false,
+                               InsertionMode = InsertionMode.Replace,
+                               UpdateTargetId = "voting-" + i
+                           }, new { })
+
+                        @Ajax.ActionLink("Down", "Downvote", "Questions", new { id = post.Id, url = post.Title }, new AjaxOptions
+                           {
+                               HttpMethod = "GET",
+                               AllowCache = false,
+                               InsertionMode = InsertionMode.Replace,
+                               UpdateTargetId = "voting-" + i
+                           }, new { })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-1">
+                <div class="well text-center">
+                    <div class="row">0</div>
+                    <div class="row">answers</div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <div class="row">
+                    <h4>
+                        <a href="/questions/@post.Id/@post.Title">@post.Title</a>
+                    </h4>
+                </div>
+                <div class="row">
+                    <p>asked 35 minutes ago in Kids Academy - програмиране за деца by a.dimitrov04 (40 points)</p>
+                </div>
+                <div class="row">
+                    @foreach (var tag in post.Tags)
+                    {
+                        <span class="label label-default">@tag.Name</span>
+                    }
+                </div>
+            </div>
+        </div>
+        <hr />
+    }
+</div>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

@@ -1,0 +1,24 @@
+﻿@model ForumSystem.Web.ViewModels.Questions.QuestionAdministrationViewModel
+
+@*<b> Bold id: @Html.DisplayFor(m => m.Id)</b>
+
+<i> Italic date: @Html.DisplayFor(m => m.ModifiedOn)</i>
+
+<strong>@Html.DisplayFor(m => m.CreatedOn)</strong>
+
+<em>@Html.DisplayFor(m => m.Content, "tinymce_full")</em>
+
+<div class="text-danger">
+    @Html.DisplayFor(m => m.AuthorName)
+</div>
+
+<div class="text-capitalize">
+    @Html.DisplayFor(m => m.Title)
+</div>
+
+@Html.CheckBoxFor(m => m.IsDeleted)*@
+
+<span>Author: @User.Identity.Name</span>
+
+@Html.EditorFor(m => m.Title, "SinglelineText")
+@Html.EditorFor(m => m.Content)
